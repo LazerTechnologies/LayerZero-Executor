@@ -1,0 +1,11 @@
+{
+  "name": "@lz/config-typescript",
+  "private": true,
+  "files": [
+    "base.json",
+    "library.json"
+  ],
+  "devDependencies": {
+    "prettier": "^3.1.0"
+  }
+}

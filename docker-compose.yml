@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  network1:
+    image: ethereumoptimism/hardhat-node
+    restart: always
+    ports:
+      - 8548:8545
+  network2:
+    image: ethereumoptimism/hardhat-node
+    restart: always
+    ports:
+      - 8549:8545
+  off-chain-executor:
+    build:
+      context: ./
+      dockerfile: ./docker/.Dockerfile-executor
+    command: [ "pnpm", "--filter", "@lz/executor", "dev" ]
+    environment:
+      - SRC_RPC_URL=http://network1:8545
+      - SRC_ENDPOINT_CONTRACT_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3
+      - DST_RPC_URL=http://network2:8545
+      - DST_ENDPOINT_CONTRACT_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3
+      - DST_PRIVATE_KEY=0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e
+    volumes:
+      - "./apps/executor:/app/apps/executor"
+    depends_on:
+      - network1
+      - network2

@@ -1,0 +1,59 @@
+{
+  "name": "@lz/sdk",
+  "description": "",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "$npm_execpath build-ts",
+    "build-ts": "$npm_execpath compile && $npm_execpath tsc --noEmit",
+    "ts": "$npm_execpath tsc --noEmit && $npm_execpath tsup",
+    "ttt": "$npm_execpath tsup",
+    "compile": "hardhat compile --show-stack-traces",
+    "clean": "hardhat clean",
+    "test": "hardhat test ./test/unit/*.spec.ts --network hardhat --show-stack-traces",
+    "localnetwork": "hardhat node --network hardhat --show-stack-traces"
+  },
+  "devDependencies": {
+    "@ethersproject/bignumber": "^5.7.0",
+    "@lz/config-tsup": "workspace:^",
+    "@lz/config-typescript": "workspace:^",
+    "@lz/lz-definitions": "workspace:^",
+    "@lz/lz-utility-v2": "workspace:^",
+    "@nomicfoundation/hardhat-chai-matchers": "2.0.2",
+    "@nomicfoundation/hardhat-ethers": "^3.0.5",
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@types/chai-as-promised": "^7.1.8",
+    "chai-as-promised": "^7.1.1",
+    "@openzeppelin/contracts": "^4.8.0",
+    "@openzeppelin/contracts-upgradeable": "^4.8.0",
+    "@typechain/ethers-v6": "^0.5.1",
+    "@typechain/hardhat": "^9.1.0",
+    "@types/node": "^18.11.18",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.54.0",
+    "ethers": "^6.9.0",
+    "glob": "^10.3.10",
+    "hardhat": "^2.19.2",
+    "hardhat-deploy": "^0.11.44",
+    "prettier": "^3.1.0",
+    "solidity-bytes-utils": "^0.8.0",
+    "tsup": "^6.7.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^5.3.2"
+  }
+}

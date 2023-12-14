@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  remote-test-node:
+    image: ethereumoptimism/hardhat-node
+    restart: always
+    ports:
+      - 8545:8545

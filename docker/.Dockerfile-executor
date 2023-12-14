@@ -1,0 +1,21 @@
+FROM node:20-slim AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+COPY . /app/
+WORKDIR /app
+
+FROM base AS prod-deps
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod
+
+FROM base AS build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
+# RUN pnpm clean && pnpm compile
+RUN pnpm --filter @lz/executor build
+
+FROM base
+COPY --from=prod-deps /app/apps/executor/node_modules /app/apps/executor/node_modules
+COPY --from=build /app/apps/executor/dist /app/apps/executor/dist
+
+CMD [ "pnpm", "--filter", "@lz/executor", "start" ]

@@ -1,0 +1,15 @@
+{
+  "name": "@lz/config-prettier",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "prettier": "^3.1.0",
+    "prettier-plugin-packagejson": "^2.4.3",
+    "prettier-plugin-solidity": "^1.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.54.0"
+  }
+}
