@@ -1,4 +1,25 @@
-import { AddressLike, BigNumberish, BytesLike } from "ethers";
+import { AddressLike, BigNumberish, BytesLike, ethers } from "ethers";
+import { ILayerZeroEndpointV2 } from "@lz/sdk";
+
+export type NetworkConfig = {
+  rpcUrl: string;
+  privateKey: string;
+  endpointContractAddress: string;
+};
+
+export type NetworkConfigJson = {
+  [networkId: string]: NetworkConfig;
+};
+
+export type Network = {
+  provider: ethers.JsonRpcProvider;
+  endpoint: ILayerZeroEndpointV2;
+  wallet: ethers.Wallet;
+};
+
+export type Networks = {
+  [networkId: string]: Network;
+}
 
 export type PacketSentEventMessage = {
   args: {
@@ -23,6 +44,12 @@ export type PacketVerifiedEventMessage = {
   transactionHash: string;
   blockNumber: bigint;
 }
+
+export type ExecutorConfig = {
+  networks: Networks;
+  delay: number;
+  startBlock: number;
+};
 
 export enum ExecutionState {
     NotExecutable = 0,

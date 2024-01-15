@@ -10,7 +10,6 @@ const main = async () => {
   const executor = new Executor(config);
 
   process.on("SIGINT", () => executor.stopExecutor());
-  
   await executor.startExecutor();
 };
 
